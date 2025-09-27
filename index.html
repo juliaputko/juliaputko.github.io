@@ -16,6 +16,28 @@
     <div>
     <div class = "square"></div>
     </div>
+  <style>
+  div {
+	perspective: 500px;	
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+}
+
+.square {
+	width: 200px;
+	height: 200px;
+	background: grey;
+	transform: rotateY(45deg);
+	animation: rotateAnimation 1s linear infinite;
+}
+
+@keyframes rotateAnimation {
+	from {transform: rotateY(45deg);}
+	to {transform: rotateY(225deg);}
+}
+    </style>
 
   <h2>Projects</h2>
   <ul>
