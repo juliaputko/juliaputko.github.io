@@ -1,17 +1,17 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About - Your Name</title>
+  <title>About - Julia Putko</title>
   <link rel="stylesheet" href="style.css" />
+  <!-- Lightbox CSS - Include only ONCE in the head -->
+  <link href="https://cdn.jsdelivr.net/npm/lightbox2@2/dist/css/lightbox.min.css" rel="stylesheet">
 </head>
 <body class ="bodye">
 
-  
 <div class = "scrollable-content">
+
 
 <header id="header" class="top-header">
   <div class="header-content">
@@ -21,7 +21,7 @@
     <div class="logo-container">
 
       <a href=#footer>
-      <img src="spiral2.png" alt="Logo" class="rotating-logo" />
+      <img src="assets/spiral2.png" alt="Logo" class="rotating-logo" />
       </a>
     </div>
    
@@ -35,46 +35,202 @@
   </div>
 </header>
 
-  <section class="text-image-section">
-    <div class="content">
-      <div class="text">
-        <h2>About Me</h2>
-        <p>This is where you write more about yourself and your background.</p>
+  <!-- <header id="header" class="top-header">
+    <div class="header-content">
+      <div class="name"><a href="index.html" class="a-header">JULIA PUTKO</a></div>
+      <div class="logo-container">
+        <a href=#footer>
+          <img src="assets/spiral2.png" alt="Logo" class="rotating-logo" />
+        </a>
       </div>
-      <div class="image">
-        <img src="profile.jpg" alt="Profile photo" />
-      </div>
+      <nav class="navbar">
+        <ul class="nav-links" >
+          <li><a href="resume.html"class="a-header">RESUME</a></li>
+          <li><a href="projects.html"class="a-header">PROJECTS</a></li>
+          <li><a href="art.html" class="a-header">ART PORTFOLIO</a></li>
+        </ul>
+      </nav>
     </div>
-  </section>
+  </header> -->
 
-  <footer id="footer" class="footer">
+  <div class="projects-grid">
+    <a href="#footsteps" class="project-box">
+      <h2>Footsteps RL</h2>
+      <p>Integration of Humanoid Animation with Footsteps Navigation for Realistic Crowd Simulation</p>
+    </a>
+    <a href="https://github.com/yourusername/project2" class="project-box">
+      <h2>Multiple Database Integration</h2>
+      <p>Short description</p>
+    </a>
+    <a href="https://github.com/yourusername/project3" class="project-box">
+      <h2>Item Preview for</h2>
+      <p>Short description</p>
+    </a>
+    <a href="https://github.com/yourusername/project4" class="project-box">
+      <h2>CPROOF</h2>
+      <p>Short description</p>
+    </a>
+    <a href="https://github.com/yourusername/project4" class="project-box">
+      <h2>Project 4</h2>
+      <p>Short description</p>
+    </a>
+    <a href="https://github.com/yourusername/project4" class="project-box">
+      <h2>GOTM</h2>
+      <p>Short description</p>
+    </a>
+  </div>
 
-  
-  <div class="footer-content">
-
-      <!-- Rotating Logo in the Center -->
-      <div class="logo-container-footer">
-      <a href=#header>
-      <img src="spiral2.png" alt="Logo" class="rotating-logo" />
-      </a>
+  <!-- Footsteps RL Section -->
+  <div id="footsteps" class="sep-box">
+    <div  class="project-text" style="text-align: center;">
+      Integration of Humanoid Animation with Footsteps Navigation for Realistic Crowd Simulation
+    </div>
+    <div>
+      <div style="text-align: center;">
+        <a href="assets/Footsteps RL.pdf" download class="btn">DOWNLOAD PDF</a>
       </div>
-<!-- <div class="footer-links"> -->
-   
-     <div class="footer-links-container-left">
-        <a href="https://github.com/juliaputko" target="_blank" class="github">GITHUB</a>
-        <a href="https://www.linkedin.com/in/julia-putko/" class="linkedin" target="_blank" >LINKEDIN</a>
-      </div>
+      <p>
+         <br>
+        Being able to model a realistic animation of a human on top of a footstep plan that adheres to biological
+        constraints is a crucial step to being able to model crowds. This paper focuses on realism in agent representation
+        as well as in agent navigation with the intention of producing realistic crowd models that can be used to represent
+        real diverse crowds for a variety of applications. Decisions to combine a footstep model and realistic humanoid animation
+        are explored by researching various methods related to character animation, crowd simulation and navigation control in a multi-agent
+        dynamic environment. This paper records the work done to begin the integration of the virtual humans from the work in realistic humanoid
+        animation including full body biped inverse kinematics, and barycentric blending with a footstep based navigation planner. Integrating navigation
+        derived from multiple agent reinforcement learning is also explored. The result of the current work hopes to lead to humanoid animations that follow
+        realistic navigation paths, are able to resolve collisions in a natural manner, and can represent diverse human motion. An investigation into
+        various analysis techniques are proposed that can be later utilized to compare the completed current method against other methods to further
+        confirm its usefulness.
+        <br><br>
+        This paper explores an animation technique, an inverse kinematic technique, and a navigation technique to begin an integration in order to make progress
+        towards producing a crowd simulation of agents that can perform locomotion within the constraints of human motion. Justification behind each technique was
+        provided in the context of choosing methods that were successful in producing natural human motion. Separate evaluations concluded that, separately, the techniques
+        described produce movement that resembles natural looking movement, and can be implemented on scales needed for crowd simulation. Progress was made to attempt integration
+        of these techniques with the assumption that a combination of the techniques within a single crowd simulation would also produce results that align with the goal of producing a crowd simulation that resembles natural movement. Evaluation techniques were explored in order to validate a working integration in the future.
+      </p>
+    </div>
 
-  <div class="footer-links-container-right">
-        <a href="mailto:juliaputko@gmail.com?subject=Portfolio%20Inquiry&body=Hi%20there%2C%20I%20checked%20out%20your%20portfolio..." class="email" target="_blank">EMAIL</a>
 
-        <a  href="https://www.google.com/maps/place/Vancouver/" target="_blank" class="location">LOCATION</a>
-
-      </div>
-    <!-- </div> -->
-  
+    <div class="hover-container">
+  <a href="projects/footsteps.html">
+    <img src="assets/footstepscover.png" alt="Footsteps RL Gallery Cover" width="150">
+    <div class="hover-overlay">
+      <span>View PDF</span>
+    </div>
+  </a>
 </div>
-    </footer>
+
+    <!-- HIDDEN IMAGES (still part of the same lightbox group) -->
+    <!-- These are necessary for Lightbox to know about the other images in the gallery -->
+    <!-- They do NOT need to be visible on the page -->
+    <a href="assets/f2.png" data-lightbox="paper-gallery" data-title="Image #1" style="display: none;"></a>
+    <a href="assets/fs3.png" data-lightbox="paper-gallery" data-title="Image #2" style="display: none;"></a>
+    <a href="assets/fs4.jpg" data-lightbox="paper-gallery" data-title="Image #3" style="display: none;"></a>
+    <a href="assets/fs_5.png" data-lightbox="paper-gallery" data-title="Image #4" style="display: none;"></a>
+    <a href="assets/fs_6.png" data-lightbox="paper-gallery" data-title="Image #5" style="display: none;"></a>
+    <a href="assets/fs7.png" data-lightbox="paper-gallery" data-title="Image #6" style="display: none;"></a>
+    <a href="assets/fs8.png" data-lightbox="paper-gallery" data-title="Image #7" style="display: none;"></a>
+    <a href="assets/fs9.png" data-lightbox="paper-gallery" data-title="Image #8" style="display: none;"></a>
+
+  </div>
+  <!-- End Section -->
+
+
+
+  <div id="mutlidb" class="sep-box">
+    <div  class="project-text" style="text-align: center;">
+      Multiple Database Integration
+    </div>
+    <div>
+      <div style="text-align: center;">
+           <a href="https://github.com/CrayLabs/SmartSim/pull/342" target="_blank" class="btn" >VIEW GITHUB</a>
+            <a href="https://www.craylabs.org/docs/orchestrator.html#mutli-orch-doc" target="_blank" class="btn">DOCUMENTATION</a>
+      </div>
+      <p>
+        While working on SmartSim, one performance bottleneck involved managing
+         multiple Redis databases across distributed compute nodes for large AI 
+         workflows. Users needed to launch, configure, and connect to multiple Redis 
+         instances for real-time data streaming. I refactored the orchestration logic 
+         to allow named instances and parallel launching across nodes using Slurm and 
+         PBS backends. This improved the scalability of the system and reduced 
+         orchestration overhead. I also ensured logs and outputs were accessible per 
+         instance to help with debugging and reproducibility across runs.
+
+         <br>
+
+      </p>
+    </div>
+  </div>
+    <!-- End Section -->
+
+
+    <div id="cproof" class="sep-box">
+    <div  class="project-text" style="text-align: center;">
+     CPROOF
+    </div>
+    <div>
+      <div style="text-align: center;">
+           <a href="https://github.com/CrayLabs/SmartSim/pull/342" target="_blank" class="btn" >VIEW GITHUB</a>
+            <a href="https://www.craylabs.org/docs/orchestrator.html#mutli-orch-doc" target="_blank" class="btn">DOCUMENTATION</a>
+      </div>
+      <p>
+        While working on SmartSim, one performance bottleneck involved managing
+         multiple Redis databases across distributed compute nodes for large AI 
+         workflows. Users needed to launch, configure, and connect to multiple Redis 
+         instances for real-time data streaming. I refactored the orchestration logic 
+         to allow named instances and parallel launching across nodes using Slurm and 
+         PBS backends. This improved the scalability of the system and reduced 
+         orchestration overhead. I also ensured logs and outputs were accessible per 
+         instance to help with debugging and reproducibility across runs.
+
+         <br>
+
+      </p>
+    </div>
+  </div>
+    <!-- End Section -->
+
+
+
+
+
+
+
+
+<footer id="footer" class="footer">
+  <div class="footer-content">
+    <div class="footer-links-container-left">
+      <a href="https://github.com/juliaputko" target="_blank" class="github">GITHUB</a>
+      <a href="https://www.linkedin.com/in/julia-putko/" target="_blank" class="linkedin">LINKEDIN</a>
+    </div>
+    <div class="logo-container-footer">
+      <a href="#header">
+        <img src="assets/spiral2.png" alt="Logo" class="rotating-logo" />
+      </a>
+    </div>
+    <div class="footer-links-container-right">
+      <a href="mailto:juliaputko@gmail.com?subject=Portfolio%20Inquiry&body=Hi%20there%2C%20I%20checked%20out%20your%20portfolio..." target="_blank" class="email">EMAIL</a>
+      <a href="https://www.google.com/maps/place/Vancouver/" target="_blank" class="location">LOCATION</a>
+    </div>
+  </div>
+</footer>
+
+</div>
+
+
+<!-- Lightbox JS -->
+<script src="https://cdn.jsdelivr.net/npm/lightbox2@2/dist/js/lightbox.min.js"></script>
+
+<!-- Lightbox Options -->
+<script>
+  lightbox.option({
+    'resizeDuration': 200,    
+    'wrapAround': true,      
+    'disableScrolling': true    
+
+  });
+</script>
 
 </body>
 </html>
