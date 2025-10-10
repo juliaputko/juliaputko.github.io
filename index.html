@@ -10,6 +10,13 @@
 
 
 <body>
+
+  <div class="loader-wrapper">
+  <div class="loader">
+    <div class="spinner"></div> 
+       <img src="assets/spiral2.png" alt="Logo" class="spinner" />
+  </div>
+</div>
 <div class = "scrollable-content">
 
 <header id="header" class="top-header">
@@ -46,77 +53,86 @@
     <div class="text-container">
     
       <p >
-                Welcome to my portfolio website. I am a software engineer, and a visual artist.
-Building open-source tools for complex systems
+     
+          Welcome to my portfolio website. I am a software engineer, and a visual artist.
+             
 
-I'm a software engineer passionate about building tools for scientific computing, HPC, and AI workflows.
-        Welcome to my portfolio website. I am a software engineer, and an artist.
-        This website represents my work but does not encompass everything that I am.
-        Please <a href="#footer" class="a-link"><strong>reach out</strong></a> if you would like to get to know me.
+          I am a software engineer passionate about building tools for scientific computing,
+           HPC, and AI workflows.
+       <br>
+        Please <a href="#footer" class="a-link"><strong>reach out</strong></a> if you would like to know more.
 
-        Welcome to my portfolio website. I am a software engineer, and an artist.
-        This website represents my work but does not encompass everything that I am.
-        Please <a href="#footer" class="a-link"><strong>reach out</strong></a> if you would like to get to know me.
-
-        Welcome to my portfolio website. I am a software engineer, and an artist.
-        This website represents my work but does not encompass everything that I am.
-        Please <a href="#footer" class="a-link"><strong>reach out</strong></a> if you would like to get to know me.
-
+        <br>
+        <br> <br>
+        I am a versatile software engineer, with experience developing tools for scientific computing and HPC/AI workflows. I have implemented reusable, maintainable systems across Python, C/C++, and  FORTRAN. I have experience in HPC environments (Slurm, PBS, LSF), data interoperability (NetCDF, HDF5, Xarray). I am passionate about interdisciplinary work and prioritizing efficient, well-documented, and user-focused solutions. 
     
+
+</div>
       </p>
   
     </div>
-
       <img class="profile-pic" src="assets/profilepic.png" alt="Profile Picture">
-  <div class="text-container">
-
-      <p>
+  
 
 
-Software:
 
-SmartSim HPC/AI orchestration (with a button: “View Project”)
+<div class="index-projects-grid">
 
-Art:
 
-Recent illustration or painting (with a button: “View Gallery”)
-</p>
-    <div style="text-align: center;">
-  <a href="projects.html" class="btn">VIEW PROJECTS</a>
-</div>
-    <div style="text-align: center;">
-   <a href="art.html" class="btn">VIEW GALLERY</a>
-</div>
-
-        This website represents my work but does not encompass everything that I am.
-        Please <a href="#footer" class="a-link"><strong>reach out</strong></a> if you would like to get to know me.
-
-        Welcome to my portfolio website. I am a software engineer, and an artist.
-        This website represents my work but does not encompass everything that I am.
-        Please <a href="#footer" class="a-link"><strong>reach out</strong></a> if you would like to get to know me.
-
-        Welcome to my portfolio website. I am a software engineer, and an artist.
-        This website represents my work but does not encompass everything that I am.
-        Please <a href="#footer" class="a-link"><strong>reach out</strong></a> if you would like to get to know me.
-
-        Welcome to my portfolio website. I am a software engineer, and an artist.
-        This website represents my work but does not encompass everything that I am.
-        Please <a href="#footer" class="a-link"><strong>reach out</strong></a> if you would like to get to know me.
-
-        Welcome to my portfolio website. I am a software engineer, and an artist.
-        This website represents my work but does not encompass everything that I am.
-        Please <a href="#footer" class="a-link"><strong>reach out</strong></a> if you would like to get to know me.
-
-        Welcome to my portfolio website. I am a software engineer, and an artist.
-        This website represents my work but does not encompass everything that I am.
-        Please <a href="#footer" class="a-link"><strong>reach out</strong></a> if you would like to get to know me.
-
-        Welcome to my portfolio website. I am a software engineer, and an artist.
-        This website represents my work but does not encompass everything that I am.
-        Please <a href="#footer" class="a-link"><strong>reach out</strong></a> if you would like to get to know me.
-      </p>
+  <div class="index-project">
+    
+      <a href="software-project.html">
+      <div class="index-card" >
+        <img src="assets/multidbcover.png" alt="prev" />
+           <h2 class="index-title">Software:</h2>
+      <p class="index-description">View most recent project</p>
+      </div>
+   
+      </a>
     </div>
+
+                   
+     <div class="index-project">
+  
+      <a href="art.html" >
+      <div class="index-card" >
+        <img src="assets/IMG_7646.jpg" alt="prev" />
+         <h2 class="index-title">ART:</h2>
+      <p class="index-description">View most recent painting</p>
+      </div>
+     
+      </a>
+    </div>
+
+
+ </div>
+
+
+
+
+        <!-- <div class="side-by-side-container-index">
+  <div class="section-index">
+      <img src="assets/footstepscover.png" class="section-index">
+    <h3>Software:</h3>
+    <p>View most recent project</p>
+    <a href="software-project.html" class="btn">View Project</a>
   </div>
+
+  <div class="section-index">
+     <img src="assets/IMG_7646.jpg" class="section-index">
+    <h3>Art:</h3>
+    <p>View most recent painting</p>
+    <a href="art.html" class="btn">View Gallery</a>
+  </div>
+</div> -->
+
+
+
+
+
+    
+
+
     <!-- </div> -->
 
 <footer id="footer" class="footer">
@@ -150,6 +166,6 @@ Recent illustration or painting (with a button: “View Gallery”)
 
   </div>
     </div>
-
+<script src="js/load.js"></script>
 </body>
 </html>
