@@ -327,7 +327,6 @@ footer {
   margin-left: 60px;
 }
 
-
 .nav-links {
   list-style: none;
   display: flex;
@@ -337,7 +336,6 @@ footer {
   color: rgb(255, 255, 255);
   font-weight: 500;
 }
-
 
 .section-resume {
   padding-top:30px;
@@ -1095,7 +1093,6 @@ footer {
   display: block;
   cursor: pointer;
 }
-
 
 @media (max-width: 1000px) {
   .sketchbook-grid {
