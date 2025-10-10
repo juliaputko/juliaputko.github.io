@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Abstract Cubes</title>
+    <style>
+        /* --- CSS Starts Here --- */
+        body {
+            margin: 0;
+            overflow: hidden; /* No scrollbars */
+            font-family: sans-serif;
+            background-color: #f0f0f0; /* Light background */
+            cursor: none; /* Hide default cursor */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Full viewport height */
+        }
+
+        .container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(to bottom, #ffffff, #e0e0ff); /* Subtle gradient */
+            perspective: 1500px; /* Increased perspective for more pronounced 3D */
+        }
+
+        #cube-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            cursor: none; /* Hide default cursor within the cube area */
+        }
+
+        .cube {
+            position: absolute;
+            background-color: rgba(128, 0, 128, 0.7); /* Purple */
+            opacity: 0.8;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            /* Removed 'float' animation, will control movement via JS */
+            transition: transform 0.3s ease-out, background-color 0.3s ease-out, box-shadow 0.3s ease-out, opacity 0.3s ease-out; /* Smooth transitions for hover effects */
+        }
+
+        /* Different colors for variety */
+        .cube:nth-child(odd) {
+            background-color: rgba(138, 43, 226, 0.7); /* Blue-Violet */
+        }
+        .cube:nth-child(3n) {
+            background-color: rgba(218, 112, 214, 0.7); /* Orchid */
+        }
+
+        /* Hover effect */
+        .cube.hovered {
+            background-color: rgba(255, 255, 0, 0.9); /* Yellow on hover */
+            transform: scale(1.5) rotateY(0deg); /* Scale up and reset rotation */
+            box-shadow: 0 0 20px rgba(255, 255, 0, 0.7);
+            opacity: 1;
+            z-index: 100; /* Bring hovered cube to front */
+        }
+
+        /* Mouse Follower */
+        .mouse-follower {
+            position: absolute;
+            top: 0; /* Will be positioned by JS */
+            left: 0; /* Will be positioned by JS */
+            width: 50px; /* Size of the follower */
+            height: 50px;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid #555;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(5px); /* Frosted glass effect */
+            z-index: 10;
+            pointer-events: none; /* So it doesn't interfere with mouse events on cubes */
+            transition: transform 0.2s ease-out, opacity 0.3s ease-out; /* Smooth movement and fade */
+            opacity: 0; /* Hidden by default */
+        }
+
+        .mouse-follower p {
+            margin-top: 10px;
+            font-size: 1.2em;
+            color: #333;
+        }
+
+        .mouse-icon {
+            width: 30px;
+            height: 30px;
+            background-color: #fff;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid #555;
+            position: relative;
+            animation: bounce 1.5s infinite ease-in-out;
+        }
+
+        .mouse-icon::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 8px;
+            height: 8px;
+            background-color: #000;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            animation: scroll-dot 1.5s infinite ease-in-out;
+        }
+
+      
+        /* --- CSS Ends Here --- */
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="mouse-follower">
+            <div class="mouse-icon"></div>
+
+        </div>
+        <div id="cube-container">
+            <!-- Cubes will be generated here by JavaScript -->
+        </div>
+    </div>
+
+    <script>
+        // --- JavaScript Starts Here ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const cubeContainer = document.getElementById('cube-container');
+            const mouseFollower = document.querySelector('.mouse-follower');
+            const numCubes = 500;
+            const mouseFollowMultiplier = 0.05; // How much cubes react to mouse proximity
+            const hoverScale = 1.5; // Scale factor on hover
+
+            // --- Cube Generation ---
+            const cubesData = []; // Store data for each cube
+
+            function getRandom(min, max) {
+                return Math.random() * (max - min) + min;
+            }
+
+            for (let i = 0; i < numCubes; i++) {
+                const cube = document.createElement('div');
+                cube.classList.add('cube');
+
+                const size = getRandom(5, 20);
+                const posX = getRandom(0, 100);
+                const posY = getRandom(0, 100);
+                const posZ = getRandom(-500, 500); // Depth for 3D effect
+                const rotateY = getRandom(0, 360); // Initial random rotation
+                const animationDelay = getRandom(0, 8); // Stagger animation
+
+                cube.style.width = `${size}px`;
+                cube.style.height = `${size}px`;
+                cube.style.left = `${posX}%`;
+                cube.style.top = `${posY}%`;
+                cube.style.zIndex = Math.floor(Math.random() * 100);
+                cube.style.transform = `translateZ(${posZ}px) rotateY(${rotateY}deg)`;
+                cube.style.animationDelay = `${animationDelay}s`;
+
+                cubeContainer.appendChild(cube);
+
+                cubesData.push({
+                    element: cube,
+                    initialTransform: cube.style.transform, // Store original transform
+                    initialRotateY: rotateY, // Store original rotation
+                    initialZIndex: cube.style.zIndex,
+                    initialSize: size,
+                    initialOpacity: cube.style.opacity,
+                    initialColor: cube.style.backgroundColor,
+                    initialBoxShadow: cube.style.boxShadow
+                });
+            }
+
+            // --- Mouse Movement Tracking ---
+            let mouseX = window.innerWidth / 2;
+            let mouseY = window.innerHeight / 2;
+            let isMouseOverContainer = false;
+
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+                isMouseOverContainer = true;
+
+                // Position the custom mouse follower
+                mouseFollower.style.left = `${mouseX}px`;
+                mouseFollower.style.top = `${mouseY}px`;
+                mouseFollower.style.opacity = '1'; // Show follower when mouse moves
+
+                // Update cube positions to react to mouse proximity
+                cubesData.forEach(cubeData => {
+                    const rect = cubeData.element.getBoundingClientRect();
+                    const cubeCenterX = rect.left + rect.width / 2;
+                    const cubeCenterY = rect.top + rect.height / 2;
+
+                    // Calculate offset from mouse cursor
+                    const offsetX = mouseX - cubeCenterX;
+                    const offsetY = mouseY - cubeCenterY;
+
+                    // Apply a slight movement TOWARDS the mouse, stronger for cubes closer to the mouse
+                    const followFactor = 0.05; // Adjust this for sensitivity
+                    const currentZ = parseFloat(cubeData.element.style.transform.match(/translateZ\(([^)]+)px\)/)?.[1] || 0);
+
+                    // Move cubes towards the mouse, stronger for deeper cubes
+                    const followX = (offsetX * followFactor) * (Math.abs(currentZ) / 1000);
+                    const followY = (offsetY * followFactor) * (Math.abs(currentZ) / 1000);
+
+                    // Re-apply original transform, rotation, and add mouse follow translation
+                    cubeData.element.style.transform = `translateZ(${currentZ}px) rotateY(${cubeData.initialRotateY}deg) translateX(${followX}px) translateY(${followY}px)`;
+                });
+            });
+
+            // Hide mouse follower when mouse leaves the window
+            document.addEventListener('mouseleave', () => {
+                isMouseOverContainer = false;
+                mouseFollower.style.opacity = '0';
+            });
+
+            // --- Hover Effect for Cubes ---
+            cubesData.forEach(cubeData => {
+                cubeData.element.addEventListener('mouseover', () => {
+                    cubeData.element.classList.add('hovered');
+                    cubeData.element.style.zIndex = '1000'; // Bring to front
+                });
+
+                cubeData.element.addEventListener('mouseout', () => {
+                    cubeData.element.classList.remove('hovered');
+                    cubeData.element.style.zIndex = cubeData.initialZIndex; // Restore original z-index
+                });
+            });
+
+            // --- Animation Loop ---
+            function animate() {
+                // Update mouse follower position
+                if (isMouseOverContainer) {
+                    mouseFollower.style.left = `${mouseX}px`;
+                    mouseFollower.style.top = `${mouseY}px`;
+                }
+
+                // Update cube positions for mouse following
+                if (isMouseOverContainer) {
+                    cubesData.forEach(cubeData => {
+                        const rect = cubeData.element.getBoundingClientRect();
+                        const cubeCenterX = rect.left + rect.width / 2;
+                        const cubeCenterY = rect.top + rect.height / 2;
+
+                        const distanceX = mouseX - cubeCenterX;
+                        const distanceY = mouseY - cubeCenterY;
+
+                        const followFactor = 0.05;
+                        const currentZ = parseFloat(cubeData.element.style.transform.match(/translateZ\(([^)]+)px\)/)?.[1] || 0);
+
+                        // Move cubes TOWARDS the mouse
+                        const followX = (distanceX * followFactor) * (Math.abs(currentZ) / 1000);
+                        const followY = (distanceY * followFactor) * (Math.abs(currentZ) / 1000);
+
+                        // Re-apply original transform, rotation, and add mouse follow translation
+                        cubeData.element.style.transform = `translateZ(${currentZ}px) rotateY(${cubeData.initialRotateY}deg) translateX(${followX}px) translateY(${followY}px)`;
+                    });
+                }
+
+                requestAnimationFrame(animate);
+            }
+
+            // Start the animation loop
+            animate();
+        });
+        // --- JavaScript Ends Here ---
+    </script>
+</body>
+</html>
