@@ -1089,7 +1089,7 @@ footer {
 
 .sketchbook-grid img {
   width: 100%;
-  height: auto;
+  height: 400px;
   display: block;
   cursor: pointer;
 }
