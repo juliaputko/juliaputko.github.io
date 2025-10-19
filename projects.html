@@ -26,14 +26,15 @@
     <div class="name"><a href="index.html" class="a-header">JULIA PUTKO</a></div>
         <!-- Rotating Logo in the Center -->
     <div class="logo-container">
-
       <a href=#footer>
       <img src="assets/spiral2.png" alt="Logo" class="rotating-logo" />
       </a>
     </div>
-   
+    <div class="hamburger" id="hamburger">
+    ☰
+  </div>
     <nav class="navbar">
-      <ul class="nav-links" >
+      <ul class="nav-links" id="navLinks">
         <li><a href="resume.html"class="a-header">RESUME</a></li>
         <li><a href="projects.html"class="a-header">PROJECTS</a></li>
       </ul>
@@ -153,26 +154,29 @@
       </div>
       <p>
          <br>
-         Add support for Multiple Databases in SmartSim (#342)
-Enables experiments to have multiple databases running. This involves
-users passing a database identifier to methods create_database,
-colocate_db_tcp and colocate_db_uds. SmartSim will set environment
-variables SSDB and SR_DB_TYPE with the identifier as a suffix. This PR
-requires an up to date SmartRedis.
-<br><br>
-        While working on SmartSim, one performance bottleneck involved managing
-         multiple Redis databases across distributed compute nodes for large AI 
-         workflows. Users needed to launch, configure, and connect to multiple Redis 
-         instances for real-time data streaming. I refactored the orchestration logic 
-         to allow named instances and parallel launching across nodes using Slurm and 
-         PBS backends. This improved the scalability of the system and reduced 
-         orchestration overhead. I also ensured logs and outputs were accessible per 
-         instance to help with debugging and reproducibility across runs.
-      <br> <br>
-         SmartSim supports automating the deployment of multiple Orchestrators from within an Experiment. Communication with the Orchestrator via a SmartRedis Client is possible with the db_identifier argument that is required when initializing an Orchestrator or colocated Model during a multiple Orchestrator Experiment. When initializing a SmartRedis Client during the Experiment, create a ConfigOptions object to specify the db_identifier argument used when creating the Orchestrator. Pass the ConfigOptions object to the Client init call.
- <br> <br>
-         SmartSim offers functionality to automate the deployment of multiple databases, supporting workloads that require multiple Orchestrators for a Experiment. For instance, a workload may consist of a simulation with high inference performance demands (necessitating a co-located deployment), along with an analysis and visualization workflow connected to the simulation (requiring a standalone Orchestrator). 
-         <br>
+
+        While working on SmartSim, I implemented functionality to automate the deployment 
+        of multiple Redis databases, supporting workloads that require multiple Orchestrators 
+        for a Experiment. 
+           <br> <br>
+        Use case example: A workload may consist of a simulation with high inference performance 
+        demands (necessitating a co-located deployment), along with an analysis and visualization 
+        workflow connected to the simulation (requiring a standalone Orchestrator), which requires  
+        support for launching multiple databases. 
+   <br> <br>
+        The feature enables experiments to have multiple databases running. This involves
+        users passing a database identifier to methods create_database,
+        colocate_db_tcp and colocate_db_uds. 
+         The db_intentifier argument is required when initializing an Orchestrator
+        or colocated Model during a multiple Orchestrator Experiment. 
+        SmartSim will set environment variables SSDB and SR_DB_TYPE with the identifier as a suffix. 
+         Communication with the Orchestrator via a SmartRedis Client is then made possible 
+        bu reading the SSDB and SR_DB_TYPE suffix. 
+
+           <br> <br>
+
+skills buttons: 
+
 
         
 
@@ -192,22 +196,38 @@ requires an up to date SmartRedis.
             <a href="https://www.craylabs.org/docs/experiment.html#previewing" target="_blank" class="btn">DOCUMENTATION</a>
       </div>
       <p>
-        Preview Entity Launch Details Prior to Start on Experiment (#525)
-This PR adds the ``Experiment.preview`` method to display the entity summaries 
-during runtime to offer additional insight into the launch details.
-
-The method surfaces entity information such as name, path, run settings, and client 
-configuration of any instance of a ``Model``, ``Ensemble``, or ``Orchestrator`` prior 
-to the start on an Experiment. 
-
-   During my time at Hewlett Packard Enterprise, I led the design and 
-   implementation of a core framework within the open source SmartSim library,
-    enabling users to inspect the properties of hybrid HPC/AI workflow to accumulate
-     preview information. I built primarily in Python with Jinja templates, and the 
+   <br> 
+     While working on SmartSim.  I led the design and 
+     core framwork enabling users to inspect the properties of hybrid HPC/AI workflow. 
+   <br>  <br>
+    I added the ``Experiment.preview`` method to display the entity summaries 
+    during runtime to offer additional insight into the launch details, before actually 
+    launching any Experiment. 
+    
+       <br>  <br>
+    The method is crucial for the understanding Entities and their properties set by the suer
+    A user can preview what they will be launching and make sure that all their assumptions on what has 
+    been set is correct prior to using and HPC resources. 
+   <br>  <br>
+    The method surfaces entity information such as name, path, run settings, and client 
+    configuration of any instance of a ``Model``, ``Ensemble``, or ``Orchestrator`` prior 
+    to the start on an Experiment. 
+   <br>  <br>
+    Any instance of a Model, Ensemble, or Orchestrator created by the Experiment can be passed 
+    as an argument to the preview method. Additionally, users may specify the name of a file to 
+    write preview data to via the output_filename argument, as well as the text format through 
+    the output_format argument. Users can also specify how verbose the preview is via the 
+    verbosity_level argument.
+   <br>  <br>
+    I built primarily in Python with Jinja templates, and the 
      solution runs on major Linux HPC platforms, and integrates with workload managers 
      including Slurm PBS, and LSF.
+
+   
     
-         <br>
+                  <br> <br>
+
+skills buttons: 
 
       </p>
     </div>
@@ -227,26 +247,62 @@ to the start on an Experiment.
       </div>
       <p>
          <br>
-As an intern, derived technical requirements from data format standards to understand engineering restrictions for the conversion of HPE SmartRedis proprietary datasets to common data formats: VTK, netCDF, HDF5, Xarray. Implemented prescriptive methods in C, C++, FORTRAN, and Python to ensure that users added the necessary metadata to convert datasets streamed from C, C++, and FORTRAN numerical simulations into a broadly-used community format (i.e. Xarray), enabling online analysis and visualization of data
 
 
-         <br>
+         
+         The ability to visualize and interpret simulation data in real time is valuable in understanding the behavior of what is going on in a simulation model, for example the behavior of a physical system.
+ A SmartSim Dataset is a multidimensional array (tensor) in Fortran, C, C++, python with associated metadata)
+ Currently SmartSim users can only retrieve SmartSim datasets and must unpack tensors and metadata using the dataset API to incorporate smartsim into their current workflows,
+ The purpose of creating a data conversion method is to alleviate this requirement and lower technical barriers to integrating data visualization and analysis.
+ Basically, the capabilities are there, it is just not as compact and usable as it could be.
+ The dataformat being prioritized for these purposes is Xarray, a python package and data format commonly used in earth sciences, machine learning and visualization for large data.
+ Xarray provides capabilities for data manipulations, analysis and visualizations, as well as convenient conversions into other formats for additional data analysis and storage (netcdf).
+ An Xarray dataarray is basically a  numpy- like array with dimensions, coordinates and attributes. Similar to pandas but with additional attached metadata 
 
-         Framework for dataset conversion (xarray) (#262)
-DatasetConverter class with add_metadata_for_xarray 
-and transform_to_xarray method. Dataset conversion 
-refers to a multi-step workflow where a user can create 
-a SmartRedis dataset which can then be retrieved on 
-the Python side, and then transformed into a {Dataformat}
-object. Dataset conversion support has only been added
-for Xarray. Additional metadata is added to an existing 
-SmartRedis dataset to add the possibility of conversion 
-in the add_metadata_for_xarray method. The 
-transform_to_xarray method ingests a Dataset and 
-returns a dictionary of  Xarray Dataarrays. 
 
-This PR includes documentation and tests for all 
-of the above.
+One of the intended uses for what i was working on is to provide scientists a flexible, easy to use method for interacting with the data generated by numerical simulation models while they are running 
+
+In my work I was taking a multidimensional array with its associated metadata posted from a simulation - and converting it into a format that is convenient for plotting in a jupyter notebook 
+Or with other visualization tools 
+Expanding the ability do do visualizations and analysis of data 
+
+
+        As an intern, derived technical requirements from data format 
+        standards to understand engineering restrictions for the conversion 
+        of HPE SmartRedis proprietary datasets to common data formats: VTK, netCDF, HDF5, 
+        Xarray. Implemented prescriptive methods in C, C++, FORTRAN, and Python to ensure that 
+        users added the necessary metadata to convert datasets streamed from C, C++, and FORTRAN 
+        numerical simulations into a broadly-used community format (i.e. Xarray), enabling online 
+        analysis and visualization of data.
+
+
+          <br>  <br>
+          Dataset conversion 
+          refers to a multi-step workflow where a user can create 
+          a SmartRedis dataset which can then be retrieved on 
+          the Python side, and then transformed into a {Dataformat}
+          object.
+     <br>  <br>
+
+      I implemented the DatasetConverter class with add_metadata_for_xarray 
+      and transform_to_xarray method. 
+      Dataset conversion support has only been added
+      for Xarray. Additional metadata is added to an existing 
+      SmartRedis dataset to add the possibility of conversion 
+      in the add_metadata_for_xarray method. The 
+      transform_to_xarray method ingests a Dataset and 
+      returns a dictionary of  Xarray Dataarrays. 
+
+           <br>  <br>
+
+        I performed extensive research on other data formats
+        that should be added into the DatasetConverter class
+        and options for how they would be added and the user types that 
+        would benefit from their addition 
+
+                   <br> <br>
+
+skills buttons: 
 
     <div class="hover-container">
   <a href="assets/SmartSim Dataset Conversions for Simulation Visualization and Analysis.pdf">
@@ -256,6 +312,8 @@ of the above.
     </div>
   </a>
 </div>
+
+
 
       </p>
     </div>
@@ -276,6 +334,9 @@ of the above.
       <p>
          <br>
       
+         As an undergraduate I worked with the GAIDD lab #link on research for 
+         modelling human footsteps, and work towards effective crowd simulation. 
+          <br><br>
         Being able to model a realistic animation of a human on top of a footstep plan that adheres to biological
         constraints is a crucial step to being able to model crowds. This paper focuses on realism in agent representation
         as well as in agent navigation with the intention of producing realistic crowd models that can be used to represent
@@ -293,6 +354,22 @@ of the above.
         provided in the context of choosing methods that were successful in producing natural human motion. Separate evaluations concluded that, separately, the techniques
         described produce movement that resembles natural looking movement, and can be implemented on scales needed for crowd simulation. Progress was made to attempt integration
         of these techniques with the assumption that a combination of the techniques within a single crowd simulation would also produce results that align with the goal of producing a crowd simulation that resembles natural movement. Evaluation techniques were explored in order to validate a working integration in the future.
+       
+       
+        <br><br>
+        In preparation for writing this paper I researched and completed presentations 
+        on the articles referenced to fully understand the previous research done on this topic
+        including.. 
+        reinforcement elarning sceince, calculation and math done to caluclate the gait of foosteps 
+        and 
+
+        competed a implemation within UNIT 
+
+                           <br> <br>
+
+skills buttons: 
+
+     
       </p>
 
 
@@ -337,12 +414,45 @@ of the above.
             <a href="https://github.com/juliaputko/pyglider" target="_blank" class="btn">GLIDER SOFTWARE</a>
       </div>
       <p>
+
+        Fisheries and Oceans Canada / Ocean Sciences Division
+Sort of the what comes after all the data processing - being able to communicate the data and use the models 
+
+Institute of Ocean Sciences (IOS) and the Canadian-Pacific Robotic Ocean Observing Facility 
+robotic ocean observing capacity off the British Columbia coast over the last few years. autonomous ocean gliders, long-term monitoring of ocean properties 
+resolving upper ocean physical and biological properties. 
+
+Institute of Ocean Sciences (IOS) and the Canadian-Pacific Robotic Ocean Observing Facility 
+robotic ocean observing capacity off the British Columbia coast over the last few years. autonomous ocean gliders, long-term monitoring of ocean properties 
+resolving upper ocean physical and biological properties. 
+collaboration with marine scientists
+Data accessibility within scientific communities but also to the greater community 
+ getting the data we collect delivered to the wider marine science community
+
+develop a general understanding of the oceanographic purpose of the data are essential. 
+developing efficient and standardized code for quality-controlling and serving the data outside our group.
+data management package to publish quality-controlled data to the C-PROOF website.
+building and modifying websites is an asset.
+
+The successful applicant should be able to work well with minimal supervision and be able to problem solve. The job will also involve working with others, as any new code modifying the data would require.
+
+ <br> <br>
+
   During my time as a Marine Science Programmer I processed real-time and delayed-mode glider data for the 
   Canadian-Pacific Robotic Ocean Observing Facility (CPROOF), ensuring compliance with metadata conventions 
   and data quality standards. Using tools such as netCDF, YAML, Python, Node.js, and Jinja, I developed intuitive
    visualizations and workflows that made complex datasets accessible to end users. I developed Python and Bash tools 
    to archive data subsets in secondary repositories and conducted quality assurance and control on published datasets. 
          <br>
+
+          link to deployments section 
+           <br>
+         link paper 
+
+ <br> <br>
+
+skills buttons: 
+
 
       </p>
 
@@ -361,7 +471,41 @@ of the above.
             <a href="https://github.com/juliaputko/cases" target="_blank" class="btn">GOTM CASES</a>
       </div>
       <p>
-  Ported a sea ice and biogeochemistry model used in Canada’s climate model into the open-source 1-D General Ocean Turbulence Model (GOTM) in FORTRAN to model climate change impacts in Arctic and marine systems
+
+General Ocean Turbulence Model in fortran 
+model climate change impacts on Arctic marine and sea-ice ecosystems
+gain insights into the use of computing skills in present-day science applications. 
+
+GOTM (Global Ocean Turbulence Model) is designed to model the behaviour over time of a water column (1D) at a given location. Provided with at least some weather data indicating above water conditions, the model reproduces underwater physical conditions (temperature, salinity, turbulence, etc. - see examples in Fig. 1).
+ <br> <br>
+ Bring the UVic ice and UVic FABM modules developed for a previous version of GOTM (v 4…) to the latest version of GOTM (v 6...), and hand them over to the GOTM community through the github compliance process. 
+
+ contributions: 
+
+         https://github.com/PatrickFarnole/code/pulls?q=is%3Apr+is%3Aclosed 
+
+         stim, flexout 
+         code cases
+        FABM
+
+    successfully in integrating fab, and stim into gotm 
+ <br> <br>
+
+  Ported a sea ice and biogeochemistry model used in Canada’s climate model into the open-source 1-D General 
+  Ocean Turbulence Model (GOTM) in FORTRAN to model climate change impacts in Arctic and marine systems
+ <br> <br>
+
+  Integrating sea-ice biogeochemistry into the public domain GOTM model framework
+
+ <br> <br>
+Arctic climate changes rapidly, therefore its modelling tools have to change at an even faster rate. In the jungle of updates, and the race to catch up with the latest submodules available for each part of the climate system, we often notice that the tradeoffs lead to a reduction of complexity.
+ <br> <br>
+Over the past few months, we worked on bringing up to date a set of relatively sophisticated sea ice and arctic biogeochemistry models, coupled to the well-known and widely used General Ocean Turbulence Model (GOTM). They contain state of the art models designed to simulate primary production (NPZD), as well as the carbon system and DMS fluxes in the Arctic. No new model has been implemented, so we will refer to the original publications and authors for further details and a review of their scientific validity. Namely:
+1. 1D thermodynamic sea ice model, adapted from Flato & Brown (1996) by N. Steiner
+2. Parametrizations for subgrid snow distribution and melt ponds (Abraham et al. 2015)
+3. 1D ice algae model, adapted from Lavoie et al. (2005) by Steiner et al.
+4. NPZD, DIC and DMS models for Resolute (CAA), by Hayashida & Mortenson (2017)
+
          <br>
 
       </p>

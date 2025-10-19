@@ -28,14 +28,22 @@
   animation: spin 1s linear infinite;
   margin: 0 auto 10px;  */
 
-  width: 50px;
-  height: 50px;
+  width: 45px;
+  height: 45px;
   animation: spin 1.8s linear infinite;
   position: center;
   opacity: 0.40;
   z-index: -1000;
 }
 
+@media (max-width: 900px) {
+
+  .spiral-logo {
+    height: 1px;
+    width: auto;
+
+  }
+}
 
 @keyframes spin {
   0% { transform: rotate(0deg); }
@@ -164,14 +172,9 @@ html {
     max-width: 100%;
   }
 
-  .name {
-    font-size: 0.9em;
-    margin-left: 5px;
-  }
 
-  .spiral-logo img {
-    height: 30px;
-  }
+
+
 }
 
 
@@ -183,7 +186,40 @@ html {
   transform: scale(2, 1.5);
   margin-left: 60px;
   z-index: 1;
+  display:flex;
 }
+
+
+@media (max-width: 768px) {
+
+  .name{
+  font-size: 0.9em;
+  text-align: wrap;
+
+}
+}
+@media (max-width: 425px) {
+
+  .name{
+  font-size: 0.9em;
+  text-align: wrap;
+  padding-right: 80px;
+
+}
+}
+
+@media (max-width: 400px) {
+
+  .name{
+  font-size: 0.6em;
+  text-align: wrap;
+
+}
+}
+
+
+
+
 
 .nav-links {
   list-style: none;
@@ -222,6 +258,7 @@ html {
   left: 48.5%;
   transform: translateX(-50%);
   z-index: 2;
+
   
 }
 .logo-container:hover {
@@ -240,7 +277,8 @@ html {
   flex-shrink: 0; 
   display: flex;
   justify-content: center;
-  flex-grow: 1; 
+  /* flex-grow: 1;  */
+  
   
 }
 
@@ -250,6 +288,7 @@ html {
   .spiral-logo img {
     height: 30px;
   }
+
 }
 
 .hamburger {
@@ -261,9 +300,11 @@ html {
 }
 
 
-@media (max-width: 768px) {
+@media (max-width: 425px) {
   .hamburger {
     display: block;
+    padding-left: 20px;
+    padding-bottom: 10px;
   }
  
    .nav-links {
@@ -295,7 +336,16 @@ html {
     flex-direction: row;
     align-items: center;
   }
+  .rotating-logo {
+    height:30px;
+    width:auto;
+  }
+  .logo-container {
+   padding-left: 70px;
 }
+
+}
+
 
 /* end header content */
 
@@ -461,6 +511,8 @@ html {
 .bodyh {
   min-height: 100vh; 
   display: flex;
+  background-size: cover;   
+  overflow: hidden;
   flex-direction: column;
   justify-content: space-between;
 
@@ -525,7 +577,7 @@ html {
 }
 @media (max-width: 900px) {
   .content-wrapper {
-    padding-top: 7vh;
+    padding-top: 8vh;
   }
 }
 
