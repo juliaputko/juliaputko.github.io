@@ -243,6 +243,20 @@ html {
   position: relative;
 }
 
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  .footer,
+  .footer-content {
+    padding: 0 20px;
+    max-width: 100%;
+  }
+
+  .footer-content > * {
+    flex-shrink: 1;  /* allow shrinking */
+    min-width: 0;    /* prevent overflow */
+  }
+}
+
 
 
 .nav-links li a {
